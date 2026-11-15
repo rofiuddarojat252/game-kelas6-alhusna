@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petualangan Ilmu Kelas 6 — SD Islam Al-Husna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #064e3b;
+      --primary-light: #d1fae5;
+      --accent: #f59e0b;
+      --accent-dark: #b45309;
+      --accent-light: #fef3c7;
+      --bg: #f0fdf4;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --danger: #ef4444;
+      --success: #10b981;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.1), 0 8px 10px -6px rgba(6, 78, 59, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at top right, #dcfce7 0%, #f0fdf4 45%, #fefce8 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, .font-display { font-family: 'Fredoka', sans-serif; }
+
+    /* Top Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: white;
+      padding: 14px 20px;
+      box-shadow: 0 4px 15px rgba(6, 78, 59, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #064e3b;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .brand-title { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+    .brand-sub { font-size: 0.78rem; color: #a7f3d0; font-weight: 500; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill-status {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fbbf24;
+    }
+    .dot.online { background: #34d399; box-shadow: 0 0 8px #34d399; }
+
+    .btn-nav {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-nav:hover { background: rgba(255,255,255,0.28); transform: translateY(-1px); }
+
+    /* Container */
+    .container {
+      max-width: 1040px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(16, 185, 129, 0.14);
+    }
+
+    .hidden { display: none !important; }
+
+    /* Login / Identitas Siswa */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    @media (max-width: 820px) {
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, #065f46 0%, #059669 65%, #10b981 100%);
+      color: white;
+      border-radius: 22px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .welcome-banner::after {
+      content: "🕌";
+      position: absolute;
+      right: -10px;
+      bottom: -18px;
+      font-size: 135px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .tag-chip {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.22);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      color: #fde68a;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .welcome-banner h1 { font-size: 1.9rem; line-height: 1.2; margin-bottom: 10px; }
+    .welcome-banner p { color: #d1fae5; font-size: 0.94rem; line-height: 1.6; }
+
+    .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .feature-pill {
+      background: rgba(255,255,255,0.14);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: var(--primary-dark);
+    }
+    .input-text {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.96rem;
+      font-family: inherit;
+      font-weight: 600;
+      transition: border-color 0.2s;
+    }
+    .input-text:focus { outline: none; border-color: var(--primary); }
+
+    .class-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .class-btn {
+      padding: 11px 6px;
+      border: 2px solid var(--border);
+      background: #f8fafc;
+      border-radius: 12px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .class-btn:hover { border-color: var(--primary); background: #ecfdf5; }
+    .class-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.28);
+      transform: translateY(-2px);
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .mode-btn {
+      padding: 10px;
+      border: 2px solid var(--border);
+      background: #f8fafc;
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mode-btn.active {
+      border-color: var(--accent-dark);
+      background: var(--accent-light);
+    }
+    .mode-title { font-weight: 800; font-size: 0.84rem; color: var(--text); }
+    .mode-desc { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.32);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    /* Subject Selection Grid */
+    .student-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      background: white;
+      padding: 14px 20px;
+      border-radius: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+    .student-info { display: flex; align-items: center; gap: 12px; }
+    .avatar-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 14px;
+    }
+    .subject-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 16px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.22s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .subject-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 20px -8px rgba(4, 120, 87, 0.22);
+    }
+    .subject-card.disabled {
+      opacity: 0.72;
+      background: #f8fafc;
+    }
+    .subj-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .subj-name { font-weight: 800; font-size: 0.96rem; margin-bottom: 6px; color: var(--text); }
+    .subj-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .badge-ready { background: #d1fae5; color: #065f46; }
+    .badge-soon { background: #f1f5f9; color: #64748b; }
+
+    /* Quiz Arena */
+    .hud-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 2px dashed var(--border);
+    }
+    .hud-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .hud-pill {
+      background: #f1f5f9;
+      padding: 7px 13px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hud-timer { background: #fef3c7; color: #b45309; }
+    .hud-timer.danger { background: #fee2e2; color: #b91c1c; animation: pulse 0.8s infinite; }
+    .hud-score { background: #d1fae5; color: #065f46; }
+    .hud-combo { background: #ffedd5; color: #c2410c; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #f59e0b);
+      width: 0%;
+      transition: width 0.35s ease;
+    }
+
+    .question-box {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      font-size: 1.06rem;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #0f172a;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 680px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      background: white;
+      border-radius: 15px;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #ecfdf5;
+      transform: translateY(-2px);
+    }
+    .option-btn:disabled { cursor: default; }
+    .option-btn.eliminated { opacity: 0.28; pointer-events: none; text-decoration: line-through; }
+    .option-btn.correct {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+    }
+    .option-btn.wrong {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #7f1d1d;
+    }
+    .opt-letter {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .option-btn.correct .opt-letter { background: #16a34a; color: white; }
+    .option-btn.wrong .opt-letter { background: #dc2626; color: white; }
+
+    .lifeline-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-lifeline {
+      padding: 8px 14px;
+      border-radius: 11px;
+      border: 2px solid #cbd5e1;
+      background: white;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-lifeline:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); }
+    .btn-lifeline:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .feedback-banner {
+      margin-top: 16px;
+      padding: 15px 18px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .feedback-banner.ok { background: #dcfce7; border: 1px solid #86efac; color: #14532d; }
+    .feedback-banner.bad { background: #fee2e2; border: 1px solid #fca5a5; color: #7f1d1d; }
+
+    .btn-next {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Result Screen */
+    .result-header {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 2px dashed var(--border);
+    }
+    .trophy-icon { font-size: 64px; margin-bottom: 8px; }
+    .score-big {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    @media (max-width: 600px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--text); }
+    .stat-lbl { font-size: 0.76rem; color: var(--muted); font-weight: 600; }
+
+    .review-list {
+      margin-top: 18px;
+      max-height: 360px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-right: 4px;
+    }
+    .review-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-size: 0.86rem;
+    }
+    .review-item.r-ok { border-left: 5px solid #16a34a; }
+    .review-item.r-bad { border-left: 5px solid #dc2626; }
+
+    /* Leaderboard Table */
+    .table-wrap { overflow-x: auto; margin-top: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: #f1f5f9; font-weight: 800; color: var(--primary-dark); }
+    tr:hover td { background: #f8fafc; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 60;
+    }
+    .modal-card {
+      background: white;
+      border-radius: 20px;
+      max-width: 560px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-badge">🕌</div>
+        <div>
+          <div class="brand-title font-display">Petualangan Ilmu Kelas 6</div>
+          <div class="brand-sub">SD Islam Al-Husna Rangkasbitung • Kelas 6A – 6D</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <div class="pill-status" id="syncBadge" title="Status koneksi Google Spreadsheet">
+          <span class="dot" id="syncDot"></span>
+          <span id="syncText">Mode Lokal (60 Soal)</span>
+        </div>
+        <button class="btn-nav" onclick="openLeaderboard()">🏆 Papan Juara</button>
+        <button class="btn-nav" id="soundBtn" onclick="toggleSound()">🔊 Suara</button>
+        <button class="btn-nav" onclick="openTeacherModal()">⚙️ Guru</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- SCREEN 1: IDENTITAS SISWA -->
+    <section id="screenLogin" class="hero-grid">
+      <div class="welcome-banner">
+        <div>
+          <span class="tag-chip">✨ ASAS Ganjil 2026/2027 • Interaktif</span>
+          <h1 class="font-display">Assalamu'alaikum, Juara Kelas 6!</h1>
+          <p>
+            Ayo uji kemampuanmu di 10 mata pelajaran seru! Pilih kelasmu (6A, 6B, 6C, atau 6D), kumpulkan skor tertinggi, dan raih peringkat terbaik di Papan Juara SD Islam Al-Husna.
+          </p>
+        </div>
+        <div class="feature-pills">
+          <span class="feature-pill">⚡ Bonus Combo</span>
+          <span class="feature-pill">💡 Bantuan 50:50</span>
+          <span class="feature-pill">📊 Terhubung Google Sheets</span>
+          <span class="feature-pill">🏅 10 Mata Pelajaran</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="font-display" style="font-size:1.35rem; margin-bottom:14px; color:var(--primary-dark);">
+          Mulai Petualangan Belajar
+        </h2>
+
+        <div class="form-group">
+          <label class="form-label" for="inputNama">Nama Lengkap Siswa</label>
+          <input type="text" id="inputNama" class="input-text" placeholder="Contoh: Muhammad Fatih Al-Farisi" maxlength="45" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Pilih Kelas</label>
+          <div class="class-grid" id="classSelector">
+            <button type="button" class="class-btn active" data-kelas="6A" onclick="selectClass('6A')">6A</button>
+            <button type="button" class="class-btn" data-kelas="6B" onclick="selectClass('6B')">6B</button>
+            <button type="button" class="class-btn" data-kelas="6C" onclick="selectClass('6C')">6C</button>
+            <button type="button" class="class-btn" data-kelas="6D" onclick="selectClass('6D')">6D</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mode Permainan</label>
+          <div class="mode-grid">
+            <button type="button" class="mode-btn active" id="modeAdventure" onclick="selectMode('adventure')">
+              <div class="mode-title">❤️ Mode Petualangan</div>
+              <div class="mode-desc">3 Nyawa + Skor Combo</div>
+            </button>
+            <button type="button" class="mode-btn" id="modePractice" onclick="selectMode('practice')">
+              <div class="mode-title">📝 Mode Latihan ASAS</div>
+              <div class="mode-desc">Tanpa batas nyawa</div>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="enterLobby()">
+          Masuk ke Arena Belajar 🚀
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: PILIH MATA PELAJARAN (10 MAPEL) -->
+    <section id="screenSubjects" class="hidden">
+      <div class="student-bar">
+        <div class="student-info">
+          <div class="avatar-circle" id="avatarInitial">A</div>
+          <div>
+            <div style="font-weight:800; font-size:1rem;" id="displayNama">Nama Siswa</div>
+            <div style="font-size:0.8rem; color:var(--muted); font-weight:600;">
+              Kelas <span id="displayKelas" style="color:var(--primary); font-weight:800;">6A</span> •
+              <span id="displayMode">Mode Petualangan</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-lifeline" onclick="syncFromGoogleSheet(true)">🔄 Segarkan Soal</button>
+          <button class="btn-lifeline" onclick="backToLogin()">✏️ Ganti Siswa</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <h2 class="font-display" style="font-size:1.35rem; color:var(--primary-dark);">Pilih Mata Pelajaran (10 Mapel)</h2>
+        <span style="font-size:0.82rem; color:var(--muted); font-weight:600;">Klik kartu mapel yang bertanda <b>Tersedia</b> untuk mulai</span>
+      </div>
+
+      <div class="subjects-grid" id="subjectsGrid"></div>
+    </section>
+
+    <!-- SCREEN 3: ARENA KUIS INTERAKTIF -->
+    <section id="screenQuiz" class="card hidden">
+      <div class="hud-bar">
+        <div class="hud-group">
+          <span class="hud-pill" style="background:var(--primary-light); color:var(--primary-dark);" id="quizMapelLabel">📘 Matematika</span>
+          <span class="hud-pill" id="quizProgressLabel">Soal 1 / 20</span>
+        </div>
+        <div class="hud-group">
+          <span class="hud-pill" id="hudLives">❤️❤️❤️</span>
+          <span class="hud-pill hud-combo hidden" id="hudCombo">🔥 Combo x2</span>
+          <span class="hud-pill hud-timer" id="hudTimer">⏱️ 45d</span>
+          <span class="hud-pill hud-score" id="hudScore">⭐ 0</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="question-box" id="questionText">Memuat soal...</div>
+
+      <div class="options-grid" id="optionsGrid"></div>
+
+      <div class="lifeline-bar" id="lifelineBar">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-lifeline" id="btn5050" onclick="use5050()">💡 Bantuan 50:50 (1x)</button>
+          <button type="button" class="btn-lifeline" id="btnAddTime" onclick="useAddTime()">⏳ +15 Detik (1x)</button>
+        </div>
+        <button type="button" class="btn-lifeline" style="color:var(--danger);" onclick="confirmQuitQuiz()">🚪 Keluar</button>
+      </div>
+
+      <div id="feedbackBanner" class="feedback-banner hidden">
+        <div id="feedbackContent"></div>
+        <button type="button" class="btn-next" id="btnNextQuestion" onclick="nextQuestion()">Soal Berikutnya ➡️</button>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: HASIL & PEMBAHASAN -->
+    <section id="screenResult" class="card hidden">
+      <div class="result-header">
+        <div class="trophy-icon" id="resTrophy">🏆</div>
+        <div style="font-weight:800; color:var(--accent-dark); font-size:0.95rem;" id="resPredikat">MUMTAZ (ISTIMEWA)</div>
+        <div class="score-big" id="resScore">100</div>
+        <div style="font-size:0.9rem; color:var(--muted); font-weight:600; margin-top:4px;" id="resStudentMeta">
+          Siswa • Kelas 6A • Matematika
+        </div>
+        <div id="saveStatusBox" style="margin-top:12px; font-size:0.82rem; font-weight:700; color:var(--primary);">
+          ⏳ Menyimpan nilai ke Google Spreadsheet...
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-val" style="color:#16a34a;" id="statBenar">0</div>
+          <div class="stat-lbl">Jawaban Benar</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:#dc2626;" id="statSalah">0</div>
+          <div class="stat-lbl">Jawaban Salah</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:#d97706;" id="statCombo">0x</div>
+          <div class="stat-lbl">Combo Tertinggi</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:#2563eb;" id="statWaktu">0d</div>
+          <div class="stat-lbl">Total Waktu</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+        <button type="button" class="btn-primary" style="flex:1; min-width:180px;" onclick="playAgainSameSubject()">🔁 Main Lagi Mapel Ini</button>
+        <button type="button" class="btn-lifeline" style="flex:1; min-width:180px; padding:14px; font-size:0.95rem;" onclick="goToSubjects()">📚 Pilih Mapel Lain</button>
+        <button type="button" class="btn-lifeline" style="flex:1; min-width:180px; padding:14px; font-size:0.95rem;" onclick="openLeaderboard()">🏆 Lihat Papan Juara</button>
+      </div>
+
+      <h3 class="font-display" style="font-size:1.15rem; color:var(--primary-dark);">📋 Review & Pembahasan Jawaban</h3>
+      <div class="review-list" id="reviewList"></div>
+    </section>
+
+    <!-- SCREEN 5: PAPAN JUARA (LEADERBOARD) -->
+    <section id="screenLeaderboard" class="card hidden">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+          <h2 class="font-display" style="font-size:1.45rem; color:var(--primary-dark);">🏆 Papan Juara Kelas 6 (6A – 6D)</h2>
+          <p style="font-size:0.84rem; color:var(--muted);">Peringkat nilai tertinggi siswa SD Islam Al-Husna Rangkasbitung</p>
+        </div>
+        <button type="button" class="btn-lifeline" onclick="closeLeaderboard()">⬅️ Kembali</button>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+        <select id="filterKelas" class="input-text" style="width:auto; padding:9px 14px; font-size:0.86rem;" onchange="renderLeaderboard()">
+          <option value="ALL">Semua Kelas (6A - 6D)</option>
+          <option value="6A">Kelas 6A</option>
+          <option value="6B">Kelas 6B</option>
+          <option value="6C">Kelas 6C</option>
+          <option value="6D">Kelas 6D</option>
+        </select>
+        <select id="filterMapel" class="input-text" style="width:auto; padding:9px 14px; font-size:0.86rem;" onchange="renderLeaderboard()">
+          <option value="ALL">Semua Mata Pelajaran</option>
+        </select>
+        <button type="button" class="btn-lifeline" onclick="refreshLeaderboardFromCloud()">🔄 Refresh Data</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Peringkat</th>
+              <th>Nama Siswa</th>
+              <th>Kelas</th>
+              <th>Mata Pelajaran</th>
+              <th>Nilai</th>
+              <th>Benar</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <tr><td colspan="7" style="text-align:center; color:var(--muted);">Belum ada data nilai. Ayo jadi yang pertama bermain!</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL PENGATURAN GURU (GOOGLE SPREADSHEET CONNECTOR) -->
+  <div id="teacherModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <h3 class="font-display" style="font-size:1.3rem; color:var(--primary-dark);">⚙️ Pengaturan Koneksi Google Spreadsheet</h3>
+        <button type="button" class="btn-lifeline" onclick="closeTeacherModal()">✕</button>
+      </div>
+
+      <div id="pinGate">
+        <p style="font-size:0.86rem; color:var(--muted); margin-bottom:10px;">
+          Masukkan PIN Guru untuk mengatur tautan Google Apps Script (PIN default: <b>2026</b>).
+        </p>
+        <div style="display:flex; gap:8px;">
+          <input type="password" id="teacherPinInput" class="input-text" placeholder="Masukkan PIN (2026)" />
+          <button type="button" class="btn-next" onclick="verifyTeacherPin()">Buka</button>
+        </div>
+      </div>
+
+      <div id="teacherPanel" class="hidden">
+        <div class="form-group">
+          <label class="form-label">URL Web App Google Apps Script</label>
+          <input type="url" id="scriptUrlInput" class="input-text" placeholder="https://script.google.com/macros/s/...../exec" style="font-size:0.84rem;" />
+          <p style="font-size:0.76rem; color:var(--muted); margin-top:6px; line-height:1.45;">
+            Tempelkan URL hasil <b>Deploy &gt; Web App</b> dari Google Spreadsheet Anda. Setelah tersimpan, soal dari sheet <code>Bank_Soal</code> dan nilai siswa ke sheet <code>Rekap_Nilai</code> akan tersinkron otomatis.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+          <button type="button" class="btn-next" onclick="saveScriptUrl()">💾 Simpan & Tes Koneksi</button>
+          <button type="button" class="btn-lifeline" onclick="resetScriptUrl()">🗑️ Putuskan Koneksi</button>
+        </div>
+
+        <div id="teacherTestResult" style="font-size:0.82rem; padding:10px; border-radius:10px; background:#f8fafc; border:1px solid var(--border);">
+          Status saat ini: Menggunakan 60 soal bawaan (Seni Budaya, Matematika, Pendidikan Pancasila).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Game Edukatif Interaktif Kelas 6 (6A – 6D) • <b>SD Islam Al-Husna Rangkasbitung</b> • Tahun Pelajaran 2026/2027
+  </footer>
+
+  <script>
+    // =========================================================================
+    // 1. KONFIGURASI DEFAULT & BANK SOAL BAWAAN (60 SOAL DARI FILE ASAS)
+    // =========================================================================
+    // Guru juga dapat menempelkan URL Web App langsung di variabel di bawah ini
+    // agar semua siswa langsung terhubung tanpa perlu setting di browser masing-masing:
+    const PRESET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxH8-mfChGnPxE-4OL3Q6Njak3OtWVv9ufgc4NTSjnYyAUBl7Ha27Rphw23GH1aN5rb/exec";
+
+    const SUBJECT_CATALOG = [
+      { name: "Pendidikan Agama Islam", icon: "🕌", bg: "#d1fae5", color: "#065f46" },
+      { name: "Pendidikan Pancasila", icon: "🦅", bg: "#fee2e2", color: "#991b1b" },
+      { name: "Bahasa Indonesia", icon: "📚", bg: "#dbeafe", color: "#1e40af" },
+      { name: "Matematika", icon: "🧮", bg: "#e0e7ff", color: "#3730a3" },
+      { name: "IPAS", icon: "🔬", bg: "#ccfbf1", color: "#115e59" },
+      { name: "PJOK", icon: "⚽", bg: "#ffedd5", color: "#9a3412" },
+      { name: "Seni Budaya", icon: "🎨", bg: "#fce7f3", color: "#9d174d" },
+      { name: "Bahasa Inggris", icon: "🌍", bg: "#e0f2fe", color: "#075985" },
+      { name: "Komputer", icon: "💻", bg: "#f1f5f9", color: "#1e293b" },
+      { name: "Bahasa Sunda", icon: "🎋", bg: "#ecfccb", color: "#3f6212" }
+    ];
+
+    const EMBEDDED_QUESTIONS = [{"id": "SB-01", "mapel": "Seni Budaya", "soal": "Tari yang memiliki pengembangan gerakan dari pola-pola tari tradisional yang sudah ada merupakan pengertian dari ....", "a": "tari tradisional", "b": "tari kreasi", "c": "tari kontemporer", "d": "tari modern", "kunci": "B", "pembahasan": "Tari kreasi adalah jenis tari yang gerakannya merupakan pengembangan dari pola-pola tari tradisional yang sudah ada."}, {"id": "SB-02", "mapel": "Seni Budaya", "soal": "Di bawah ini adalah salah satu karakteristik gerak tari kreasi, yaitu ....", "a": "mengutamakan gerak tarian dari hasil eksplorasi", "b": "menunjukkan identitas tradisi", "c": "memiliki gerakan susah dipelajari", "d": "waktu pertunjukan lebih lama", "kunci": "A", "pembahasan": "Salah satu karakteristik utama tari kreasi adalah mengutamakan gerak tarian yang berasal dari hasil eksplorasi."}, {"id": "SB-03", "mapel": "Seni Budaya", "soal": "Seorang penari dapat menggunakan gerakan tari sebagai bentuk ungkapan perasaan dan ekspresi dirinya merupakan fungsi dari tari kreasi sebagai ....", "a": "media pertunjukan", "b": "media sosial", "c": "media mengekspresikan diri", "d": "media silaturahmi", "kunci": "C", "pembahasan": "Gerakan tari yang digunakan untuk mengungkapkan perasaan penari merupakan fungsi tari sebagai media mengekspresikan diri."}, {"id": "SB-04", "mapel": "Seni Budaya", "soal": "Seni tari kreasi senantiasa mengalami perkembangan sesuai dengan ....", "a": "keadaan penari", "b": "kemajuan media sosial", "c": "kemajuan zaman", "d": "keadaan sosial", "kunci": "C", "pembahasan": "Seni tari kreasi bersifat dinamis dan senantiasa berkembang mengikuti kemajuan zaman."}, {"id": "SB-05", "mapel": "Seni Budaya", "soal": "Tari kreasi yang masih dilandasi oleh nilai-nilai tari tradisional setempat merupakan pengertian dari ....", "a": "tari kreasi baru berpola tradisi", "b": "tari kreasi baru berpola modern", "c": "tari kreasi baru tidak berpola tradisi", "d": "tari kreasi modern berpola modern", "kunci": "A", "pembahasan": "Tari kreasi baru berpola tradisi adalah tari kreasi yang garapannya masih dilandasi kaidah dan nilai tari tradisional."}, {"id": "SB-06", "mapel": "Seni Budaya", "soal": "Di bawah ini yang bukan merupakan unsur pendukung tari kreasi yaitu ....", "a": "tata rias", "b": "tata busana", "c": "properti tari", "d": "penonton", "kunci": "D", "pembahasan": "Unsur pendukung tari meliputi iringan musik, tata rias, tata busana, properti, dan tata panggung. Penonton bukan unsur pendukung tari."}, {"id": "SB-07", "mapel": "Seni Budaya", "soal": "Kalung, gelang, mahkota, ikat kepala, dan ikat pinggang merupakan unsur pendukung tari kreasi bagian ....", "a": "tata rias", "b": "tata busana", "c": "properti", "d": "aksesoris", "kunci": "D", "pembahasan": "Perhiasan atau perlengkapan seperti kalung, gelang, mahkota, dan ikat kepala termasuk bagian aksesoris."}, {"id": "SB-08", "mapel": "Seni Budaya", "soal": "Di bawah ini langkah-langkah membuat tari kreasi yang tepat yaitu ....", "a": "eksplorasi - improvisasi - evaluasi - komposisi", "b": "improvisasi - evaluasi - komposisi - eksplorasi", "c": "eksplorasi - evaluasi - improvisasi - komposisi", "d": "eksplorasi - komposisi - evaluasi - improvisasi", "kunci": "A", "pembahasan": "Urutan proses penciptaan tari kreasi adalah eksplorasi, improvisasi, evaluasi, dan komposisi."}, {"id": "SB-09", "mapel": "Seni Budaya", "soal": "Pencarian gerak untuk menghasilkan teknik gerakan merupakan tahap ....", "a": "eksplorasi", "b": "komposisi", "c": "evaluasi", "d": "improvisasi", "kunci": "A", "pembahasan": "Eksplorasi adalah tahap awal berupa penjajakan atau pencarian gerak untuk menghasilkan berbagai teknik gerakan."}, {"id": "SB-10", "mapel": "Seni Budaya", "soal": "Tahapan untuk mengembangkan hasil dari eksplorasi secara spontan maupun terarah merupakan tahap ....", "a": "sosialisasi", "b": "komposisi", "c": "evaluasi", "d": "improvisasi", "kunci": "D", "pembahasan": "Improvisasi merupakan tahap pengembangan gerak lebih lanjut dari hasil eksplorasi."}, {"id": "SB-11", "mapel": "Seni Budaya", "soal": "Pementasan teater dalam bentuk naskah disebut ....", "a": "skenario", "b": "naskah", "c": "akting", "d": "lakon", "kunci": "D", "pembahasan": "Pementasan teater yang disajikan berdasarkan cerita atau naskah disebut lakon."}, {"id": "SB-12", "mapel": "Seni Budaya", "soal": "Ciri-ciri naskah lakon yang baik yaitu ....", "a": "isi cerita naskah lakon tidak spontan", "b": "naskah disajikan monolog", "c": "naskah disajikan dalam bentuk dialog", "d": "isi cerita lakon bukan berdasarkan sejarah", "kunci": "C", "pembahasan": "Naskah lakon drama pada umumnya disajikan dalam bentuk dialog antartokoh."}, {"id": "SB-13", "mapel": "Seni Budaya", "soal": "Pada akhir cerita, peran utama akan berujung tragis dan penuh kesedihan. Lakon tersebut termasuk jenis lakon ....", "a": "tragikomedi", "b": "melodrama", "c": "tragi", "d": "komedi", "kunci": "C", "pembahasan": "Lakon tragi (tragedi) adalah lakon yang mengisahkan kemalangan dan berakhir menyedihkan bagi tokoh utama."}, {"id": "SB-14", "mapel": "Seni Budaya", "soal": "Contoh cerita lakon komedi dari daerah Nusantara yaitu ....", "a": "Bandung Lautan Api", "b": "Si Pitung Jagoan Betawi", "c": "Janur Kuning", "d": "Si Kabayan", "kunci": "D", "pembahasan": "Si Kabayan merupakan cerita rakyat jenaka dari Sunda yang sering dipentaskan sebagai lakon komedi."}, {"id": "SB-15", "mapel": "Seni Budaya", "soal": "Yang bukan prinsip penyusunan naskah lakon yaitu ....", "a": "keutuhan", "b": "keseimbangan", "c": "keselarasan", "d": "kemandirian", "kunci": "D", "pembahasan": "Prinsip penyusunan naskah lakon meliputi keutuhan (unity), keseimbangan (balance), keselarasan (harmony), dan fokus."}, {"id": "SB-16", "mapel": "Seni Budaya", "soal": "Unsur-unsur dalam naskah lakon harus memiliki keseimbangan merupakan prinsip dari ....", "a": "unity", "b": "harmony", "c": "balance", "d": "fokus", "kunci": "C", "pembahasan": "Balance berarti keseimbangan antarunsur dalam penyusunan naskah maupun pementasan."}, {"id": "SB-17", "mapel": "Seni Budaya", "soal": "Salah satu unsur seni teater yang berkaitan dengan posisi tubuh pemain saat berada di pentas, di mana para pemain harus melakukan perpindahan posisi disebut ....", "a": "blocking", "b": "akting", "c": "matching", "d": "syuting", "kunci": "A", "pembahasan": "Blocking adalah pengaturan posisi dan perpindahan tempat pemain di atas panggung."}, {"id": "SB-18", "mapel": "Seni Budaya", "soal": "Di bawah ini adalah yang bukan prinsip-prinsip dasar blocking, yaitu ....", "a": "seimbang", "b": "utuh", "c": "monoton", "d": "bervariasi", "kunci": "C", "pembahasan": "Blocking yang baik harus seimbang, utuh, bervariasi, dan memiliki titik pusat—tidak boleh monoton."}, {"id": "SB-19", "mapel": "Seni Budaya", "soal": "Kedudukan pemain di atas panggung harus seimbang dan tidak mengelompok pada satu sisi. Hal tersebut merupakan prinsip ....", "a": "seimbang", "b": "utuh", "c": "bervariasi", "d": "titik pusat", "kunci": "A", "pembahasan": "Prinsip seimbang mengatur agar komposisi pemain di panggung merata dan tidak berat sebelah."}, {"id": "SB-20", "mapel": "Seni Budaya", "soal": "Menceritakan sebuah cerita yang dilakukan seseorang sehingga mewakili karakternya disebut ....", "a": "akting", "b": "blocking", "c": "matching", "d": "syuting", "kunci": "A", "pembahasan": "Akting adalah seni memerankan tokoh dan karakter dalam sebuah pertunjukan teater."}, {"id": "MTK-01", "mapel": "Matematika", "soal": "Dalam kegiatan Market Day, kelas 6C menyiapkan 36 bungkus makanan dan 48 kerajinan. Panitia ingin membuat paket dengan perbandingan makanan dan kerajinan yang tetap. Bentuk paling sederhana dari perbandingan tersebut adalah ....", "a": "2 : 3", "b": "3 : 4", "c": "4 : 5", "d": "4 : 3", "kunci": "B", "pembahasan": "36 : 48 disederhanakan dengan membagi kedua bilangan dengan FPB-nya (12), sehingga menjadi 3 : 4."}, {"id": "MTK-02", "mapel": "Matematika", "soal": "Perpustakaan memiliki 120 buku cerita dan 80 buku pengetahuan. Seorang siswa menyatakan perbandingan buku cerita terhadap seluruh buku adalah 3 : 5. Penilaian yang tepat terhadap pernyataan tersebut adalah ....", "a": "Benar, karena 120 : 200 = 3 : 5", "b": "Benar, karena 120 : 80 = 3 : 5", "c": "Salah, karena seharusnya 2 : 3", "d": "Salah, karena seharusnya 5 : 3", "kunci": "A", "pembahasan": "Seluruh buku = 120 + 80 = 200. Perbandingan buku cerita terhadap seluruh buku = 120 : 200 = 3 : 5."}, {"id": "MTK-03", "mapel": "Matematika", "soal": "Untuk membuat minuman, air, sirop, dan perasan lemon dicampur dengan rasio 7 : 2 : 1. Jika air yang digunakan 1.400 ml, volume sirop yang diperlukan adalah ....", "a": "100 ml", "b": "200 ml", "c": "400 ml", "d": "700 ml", "kunci": "C", "pembahasan": "1 bagian rasio = 1.400 ml ÷ 7 = 200 ml. Volume sirop (2 bagian) = 2 × 200 ml = 400 ml."}, {"id": "MTK-04", "mapel": "Matematika", "soal": "Rasio uang Rani dan Sinta adalah 3 : 5. Rasio uang Sinta dan Tono adalah 10 : 7. Jika disatukan, perbandingan Rani : Sinta : Tono yang tepat adalah ....", "a": "3 : 5 : 7", "b": "6 : 10 : 7", "c": "6 : 5 : 14", "d": "3 : 10 : 7", "kunci": "B", "pembahasan": "Samakan nilai Sinta menjadi 10: Rani : Sinta = 6 : 10, dan Sinta : Tono = 10 : 7. Jadi Rani : Sinta : Tono = 6 : 10 : 7."}, {"id": "MTK-05", "mapel": "Matematika", "soal": "Dalam satu kelas terdapat 18 siswa laki-laki dan 27 siswa perempuan. Seorang siswa menyederhanakan rasio laki-laki terhadap perempuan menjadi 3 : 2. Letak kesalahannya adalah ....", "a": "Pembilang dan penyebut harus dijumlahkan", "b": "Kedua bilangan seharusnya dibagi 9 sehingga menjadi 2 : 3", "c": "Rasio tidak dapat disederhanakan", "d": "Kedua bilangan seharusnya dikali 9", "kunci": "B", "pembahasan": "18 : 27 jika dibagi 9 menghasilkan 2 : 3 (bukan terbalik menjadi 3 : 2)."}, {"id": "MTK-06", "mapel": "Matematika", "soal": "Tabel menunjukkan jumlah pengunjung pameran: Senin 120 orang, Selasa 150 orang, Rabu 180 orang, dan Kamis 150 orang. Kesimpulan yang paling tepat adalah ....", "a": "Pengunjung terbanyak pada Senin", "b": "Pengunjung Rabu 30 orang lebih banyak daripada Selasa", "c": "Pengunjung Kamis paling sedikit", "d": "Jumlah pengunjung Selasa dan Kamis berbeda 30 orang", "kunci": "B", "pembahasan": "Pengunjung Rabu (180) dikurangi Selasa (150) = 30 orang lebih banyak."}, {"id": "MTK-07", "mapel": "Matematika", "soal": "Dari 200 peserta kegiatan sekolah, 35% mengikuti lomba olahraga. Banyak peserta yang mengikuti lomba olahraga adalah ....", "a": "35 orang", "b": "60 orang", "c": "70 orang", "d": "75 orang", "kunci": "C", "pembahasan": "35% × 200 = (35/100) × 200 = 70 orang."}, {"id": "MTK-08", "mapel": "Matematika", "soal": "Diagram lingkaran suatu koleksi buku menunjukkan 40% buku cerita, 25% buku pengetahuan, 20% buku agama, dan sisanya buku keterampilan. Jika seluruh buku berjumlah 800, banyak buku keterampilan adalah ....", "a": "80", "b": "100", "c": "120", "d": "160", "kunci": "C", "pembahasan": "Persentase buku keterampilan = 100% - (40% + 25% + 20%) = 15%. Banyaknya = 15% × 800 = 120 buku."}, {"id": "MTK-09", "mapel": "Matematika", "soal": "Sebuah toko menjual 3 buku tulis seharga Rp12.000,00. Jika harga setiap buku sama, cara paling tepat menentukan harga 8 buku adalah ....", "a": "12.000 × 8", "b": "12.000 ÷ 3 × 8", "c": "12.000 ÷ 8 × 3", "d": "12.000 + 8", "kunci": "B", "pembahasan": "Cari harga 1 buku terlebih dahulu (12.000 ÷ 3 = 4.000), lalu kalikan 8."}, {"id": "MTK-10", "mapel": "Matematika", "soal": "Mita menempuh 6 km dalam 30 menit dengan kecepatan tetap. Pernyataan yang benar untuk perjalanan selama 1 jam adalah ....", "a": "Jaraknya 6 km", "b": "Jaraknya 9 km", "c": "Jaraknya 12 km", "d": "Jaraknya 18 km", "kunci": "C", "pembahasan": "1 jam = 60 menit (2 kali 30 menit), sehingga jarak tempuh = 2 × 6 km = 12 km."}, {"id": "MTK-11", "mapel": "Matematika", "soal": "Jumlah siswa yang memilih ekstrakurikuler Pramuka, Futsal, dan Hadroh berturut-turut adalah 24, 18, dan 30 orang. Jika akan dibentuk kelompok dengan komposisi yang sama, rasio paling sederhana ketiganya adalah ....", "a": "4 : 3 : 5", "b": "3 : 4 : 5", "c": "4 : 5 : 3", "d": "5 : 4 : 3", "kunci": "A", "pembahasan": "24 : 18 : 30 dibagi FPB-nya (6) menjadi 4 : 3 : 5."}, {"id": "MTK-12", "mapel": "Matematika", "soal": "Dalam bazar, 5 kotak kerajinan berisi 60 gantungan kunci. Jika setiap kotak berisi sama banyak, jumlah gantungan kunci dalam 8 kotak adalah ....", "a": "84", "b": "90", "c": "96", "d": "108", "kunci": "C", "pembahasan": "1 kotak = 60 ÷ 5 = 12 buah. Jadi 8 kotak = 8 × 12 = 96 gantungan kunci."}, {"id": "MTK-13", "mapel": "Matematika", "soal": "Sebuah kelas memiliki 32 siswa. Sebanyak 12 siswa menyukai Matematika, 8 siswa menyukai IPA, dan sisanya menyukai Bahasa Indonesia. Kesimpulan yang tepat adalah ....", "a": "25% siswa menyukai Bahasa Indonesia", "b": "37,5% siswa menyukai Matematika", "c": "20% siswa menyukai IPA", "d": "40% siswa menyukai Bahasa Indonesia", "kunci": "B", "pembahasan": "Persentase Matematika = (12/32) × 100% = (3/8) × 100% = 37,5%."}, {"id": "MTK-14", "mapel": "Matematika", "soal": "Rasio panjang pita merah dan biru adalah 4 : 7. Jika panjang pita biru 42 cm, panjang pita merah adalah ....", "a": "18 cm", "b": "21 cm", "c": "24 cm", "d": "28 cm", "kunci": "C", "pembahasan": "Panjang pita merah = (4/7) × 42 cm = 4 × 6 cm = 24 cm."}, {"id": "MTK-15", "mapel": "Matematika", "soal": "Sebuah resep untuk 4 porsi memerlukan 300 gram tepung. Resep akan dibuat untuk 10 porsi. Seorang siswa menghitung kebutuhan tepung 600 gram. Evaluasi yang benar adalah ....", "a": "Benar, karena porsi bertambah 6", "b": "Salah, seharusnya 650 gram", "c": "Salah, seharusnya 750 gram", "d": "Salah, seharusnya 900 gram", "kunci": "C", "pembahasan": "1 porsi = 300 ÷ 4 = 75 gram. Untuk 10 porsi = 10 × 75 = 750 gram."}, {"id": "MTK-16", "mapel": "Matematika", "soal": "Data penjualan Market Day: makanan 45 bungkus, minuman 30 bungkus, kerajinan 25 buah. Ketua kelompok ingin menyajikan data yang paling mudah digunakan untuk membandingkan jumlah setiap jenis produk. Bentuk penyajian terbaik adalah ....", "a": "Diagram batang", "b": "Cerita narasi panjang", "c": "Denah lokasi", "d": "Garis bilangan", "kunci": "A", "pembahasan": "Diagram batang sangat efektif dan mudah dibaca untuk membandingkan jumlah antar kategori data."}, {"id": "MTK-17", "mapel": "Matematika", "soal": "Dua kelompok membuat paket alat tulis. Paket A berisi 2 pensil dan 3 penghapus. Paket B berisi 4 pensil dan 6 penghapus. Kesimpulan yang tepat adalah ....", "a": "Komposisi kedua paket berbeda", "b": "Paket B memiliki komposisi dua kali Paket A dan rasionya senilai", "c": "Paket A memiliki lebih banyak penghapus", "d": "Kedua paket tidak dapat dibandingkan", "kunci": "B", "pembahasan": "Rasio 2 : 3 senilai dengan 4 : 6 (kelipatan 2 kali lipat)."}, {"id": "MTK-18", "mapel": "Matematika", "soal": "Sekolah akan memilih salah satu penawaran air mineral. Toko P menjual 12 botol seharga Rp36.000,00. Toko Q menjual 10 botol seharga Rp32.000,00. Jika kualitas dan ukuran sama, keputusan paling hemat adalah ....", "a": "Toko P, karena harga per botol Rp3.000,00", "b": "Toko Q, karena harga per botol Rp3.000,00", "c": "Toko P, karena harga per botol Rp3.200,00", "d": "Keduanya sama, karena jumlah botol berbeda", "kunci": "A", "pembahasan": "Toko P: Rp36.000 ÷ 12 = Rp3.000/botol. Toko Q: Rp32.000 ÷ 10 = Rp3.200/botol. Jadi Toko P lebih hemat."}, {"id": "MTK-19", "mapel": "Matematika", "soal": "Dalam sebuah survei, 18 dari 30 siswa memilih kegiatan membaca. Seorang siswa menyimpulkan bahwa 70% siswa memilih membaca. Tanggapan yang tepat adalah ....", "a": "Tepat, karena 18 + 30 = 48", "b": "Tepat, karena 18 : 30 = 70%", "c": "Tidak tepat, karena persentasenya 60%", "d": "Tidak tepat, karena persentasenya 40%", "kunci": "C", "pembahasan": "(18/30) × 100% = (3/5) × 100% = 60%."}, {"id": "MTK-20", "mapel": "Matematika", "soal": "Kelas 6C mengumpulkan 96 buku untuk donasi. Buku akan dibagikan kepada tiga taman baca dengan rasio 2 : 3 : 7. Rancangan pembagian yang tepat adalah ....", "a": "16, 24, dan 56 buku", "b": "20, 24, dan 52 buku", "c": "12, 36, dan 48 buku", "d": "18, 24, dan 54 buku", "kunci": "A", "pembahasan": "Total rasio = 2 + 3 + 7 = 12. 1 bagian = 96 ÷ 12 = 8 buku. Maka pembagiannya: 16, 24, dan 56 buku."}, {"id": "PP-01", "mapel": "Pendidikan Pancasila", "soal": "Di lingkungan masyarakat terdapat aturan untuk menjaga kebersihan. Setiap warga diwajibkan membuang sampah pada tempatnya. Namun, beberapa warga masih membuang sampah ke sungai. Tindakan warga tersebut menunjukkan bahwa mereka ....", "a": "telah melaksanakan norma kesopanan", "b": "tidak mematuhi norma yang berlaku di masyarakat", "c": "telah memenuhi kewajiban sebagai warga", "d": "memiliki hak menggunakan lingkungan sesuka hati", "kunci": "B", "pembahasan": "Membuang sampah ke sungai melanggar aturan kebersihan lingkungan dan menunjukkan ketidakpatuhan terhadap norma."}, {"id": "PP-02", "mapel": "Pendidikan Pancasila", "soal": "Raka selalu mengucapkan salam ketika bertemu guru dan berbicara dengan sopan kepada orang yang lebih tua. Perilaku Raka merupakan penerapan norma ....", "a": "hukum", "b": "kesusilaan", "c": "kesopanan", "d": "agama", "kunci": "C", "pembahasan": "Mengucapkan salam dan bertutur kata halus kepada orang yang lebih tua adalah wujud norma kesopanan."}, {"id": "PP-03", "mapel": "Pendidikan Pancasila", "soal": "Di sebuah sekolah terdapat aturan bahwa setiap siswa harus menjaga fasilitas sekolah. Andi mencoret-coret meja dan dinding kelas. Tindakan yang paling tepat untuk memperbaiki perilaku Andi adalah ....", "a": "membiarkannya karena fasilitas sekolah bukan miliknya", "b": "meminta Andi menghapus coretan dan tidak mengulanginya", "c": "mengajak teman-teman mencoret dinding bersama-sama", "d": "menyembunyikan perbuatan Andi dari guru", "kunci": "B", "pembahasan": "Bentuk tanggung jawab atas pelanggaran tata tertib adalah membersihkan kembali coretan dan berjanji tidak mengulanginya."}, {"id": "PP-04", "mapel": "Pendidikan Pancasila", "soal": "Masyarakat memiliki tradisi kerja bakti setiap hari Minggu. Namun, beberapa warga tidak mau ikut serta tanpa alasan yang jelas. Dampak yang paling mungkin terjadi adalah ....", "a": "hubungan antarwarga semakin erat", "b": "pekerjaan menjadi lebih ringan", "c": "kebersamaan dan kepedulian masyarakat berkurang", "d": "lingkungan menjadi lebih terawat", "kunci": "C", "pembahasan": "Ketidakhadiran warga dalam kerja bakti tanpa alasan akan mengurangi rasa kebersamaan dan kepedulian sosial."}, {"id": "PP-05", "mapel": "Pendidikan Pancasila", "soal": "Setiap anak memiliki hak mendapatkan pendidikan dan kasih sayang. Di sisi lain, anak juga mempunyai kewajiban membantu orang tua sesuai kemampuannya. Hubungan antara hak dan kewajiban tersebut menunjukkan bahwa ....", "a": "hak harus didahulukan daripada kewajiban", "b": "kewajiban hanya berlaku ketika anak sudah dewasa", "c": "hak dan kewajiban harus dilaksanakan secara seimbang", "d": "anak hanya perlu melaksanakan kewajiban di sekolah", "kunci": "C", "pembahasan": "Hak dan kewajiban merupakan dua hal yang saling berkaitan dan harus dijalankan secara seimbang."}, {"id": "PP-06", "mapel": "Pendidikan Pancasila", "soal": "Nadia mendapatkan fasilitas belajar yang lengkap dari orang tuanya. Akan tetapi, ia tidak mau belajar dan selalu mengabaikan nasihat orang tua. Sikap Nadia menunjukkan bahwa ....", "a": "ia telah melaksanakan hak dan kewajibannya secara seimbang", "b": "ia menikmati hak tetapi belum melaksanakan kewajibannya", "c": "ia tidak mempunyai hak di rumah", "d": "ia sudah melaksanakan seluruh tanggung jawabnya", "kunci": "B", "pembahasan": "Nadia sudah menerima haknya berupa fasilitas belajar, namun belum menunaikan kewajibannya untuk belajar dengan rajin."}, {"id": "PP-07", "mapel": "Pendidikan Pancasila", "soal": "Ketika kegiatan belajar berlangsung, seorang siswa memperoleh kesempatan yang sama untuk bertanya kepada guru. Hal tersebut merupakan contoh ....", "a": "kewajiban siswa terhadap sekolah", "b": "hak siswa mendapatkan pendidikan dan perlakuan yang adil", "c": "kewajiban guru memberikan tugas tambahan", "d": "hak siswa untuk meninggalkan kelas", "kunci": "B", "pembahasan": "Kesempatan yang sama untuk bertanya dan mendapat bimbingan adalah hak setiap siswa."}, {"id": "PP-08", "mapel": "Pendidikan Pancasila", "soal": "Perhatikan perilaku berikut! (1) Membantu membersihkan rumah. (2) Mendapatkan kasih sayang orang tua. (3) Mematuhi nasihat orang tua. (4) Mendapatkan makanan bergizi. Perilaku yang termasuk kewajiban anak di rumah ditunjukkan oleh nomor ....", "a": "1 dan 2", "b": "1 dan 3", "c": "2 dan 4", "d": "3 dan 4", "kunci": "B", "pembahasan": "Nomor (1) dan (3) adalah kewajiban anak, sedangkan (2) dan (4) adalah hak anak di rumah."}, {"id": "PP-09", "mapel": "Pendidikan Pancasila", "soal": "Dina selalu menuntut mendapatkan hak bermain, tetapi ia tidak mau mengerjakan tugas sekolah dan membantu orang tua. Sikap yang sebaiknya dilakukan Dina adalah ....", "a": "tetap bermain karena anak memiliki hak bermain", "b": "menghindari tugas agar memiliki banyak waktu luang", "c": "mengatur waktu untuk belajar, membantu orang tua, dan bermain", "d": "meminta orang tua mengerjakan semua tugasnya", "kunci": "C", "pembahasan": "Dina perlu membagi waktu secara bijak agar kewajiban belajar dan membantu orang tua terpenuhi sebelum bermain."}, {"id": "PP-10", "mapel": "Pendidikan Pancasila", "soal": "Perhatikan dua aturan berikut! Aturan I: Setiap pengendara wajib mematuhi rambu lalu lintas. Aturan II: Setiap anak harus berbicara sopan kepada orang yang lebih tua. Perbedaan kedua aturan tersebut adalah ....", "a": "aturan I tertulis, sedangkan aturan II tidak tertulis", "b": "aturan I tidak tertulis, sedangkan aturan II tertulis", "c": "keduanya merupakan aturan tidak tertulis", "d": "keduanya tidak berlaku dalam kehidupan masyarakat", "kunci": "A", "pembahasan": "Aturan lalu lintas merupakan norma hukum tertulis, sedangkan aturan berbicara sopan adalah norma kesopanan tidak tertulis."}, {"id": "PP-11", "mapel": "Pendidikan Pancasila", "soal": "Kelas VI akan menentukan tujuan kegiatan kunjungan edukasi. Ada siswa yang mengusulkan museum dan ada yang mengusulkan tempat bersejarah. Agar diperoleh keputusan bersama, tindakan terbaik adalah ....", "a": "mengikuti usulan ketua kelas tanpa diskusi", "b": "memilih usulan siswa yang paling banyak berbicara", "c": "membahas setiap usulan dan mempertimbangkan kepentingan bersama", "d": "membatalkan kegiatan karena terdapat perbedaan pendapat", "kunci": "C", "pembahasan": "Perbedaan usulan dalam kelas diselesaikan melalui musyawarah dengan mempertimbangkan manfaat bersama."}, {"id": "PP-12", "mapel": "Pendidikan Pancasila", "soal": "Dalam musyawarah, setiap peserta mempunyai kesempatan yang sama untuk menyampaikan pendapat. Hal tersebut mencerminkan nilai ....", "a": "persaingan", "b": "demokrasi dan keadilan", "c": "kekuasaan", "d": "kepentingan pribadi", "kunci": "B", "pembahasan": "Kesetaraan hak berbicara dalam musyawarah merupakan cerminan nilai demokrasi dan keadilan (Sila ke-4 & ke-5)."}, {"id": "PP-13", "mapel": "Pendidikan Pancasila", "soal": "Musyawarah dilakukan bukan hanya untuk memperoleh keputusan bersama, tetapi juga melatih peserta agar ....", "a": "selalu memenangkan pendapat sendiri", "b": "menghargai dan mendengarkan pendapat orang lain", "c": "menghindari tanggung jawab", "d": "mengutamakan kepentingan pribadi", "kunci": "B", "pembahasan": "Musyawarah melatih sikap toleransi, saling menghormati, dan lapang dada menerima pendapat orang lain."}, {"id": "PP-14", "mapel": "Pendidikan Pancasila", "soal": "Dalam rapat kelas, Budi mengusulkan kegiatan penghijauan. Namun, beberapa temannya memiliki usulan berbeda. Sikap yang sebaiknya dilakukan Budi adalah ....", "a": "memaksakan usulannya agar diterima", "b": "meninggalkan rapat karena pendapatnya berbeda", "c": "mendengarkan dan mempertimbangkan pendapat teman", "d": "meminta teman-temannya mengikuti keinginannya", "kunci": "C", "pembahasan": "Peserta musyawarah harus menghargai perbedaan pendapat dan mempertimbangkannya dengan bijak."}, {"id": "PP-15", "mapel": "Pendidikan Pancasila", "soal": "Saat musyawarah berlangsung, hanya ketua kelas yang aktif menyampaikan pendapat. Sementara itu, peserta lain hanya diam. Agar musyawarah berjalan dengan baik, tindakan yang tepat adalah ....", "a": "langsung menetapkan keputusan ketua kelas", "b": "memberikan kesempatan kepada semua peserta untuk berpendapat", "c": "membatasi pendapat hanya untuk pengurus kelas", "d": "menghentikan musyawarah", "kunci": "B", "pembahasan": "Pemimpin musyawarah harus mendorong partisipasi aktif seluruh anggota agar keputusan benar-benar mewakili semua."}, {"id": "PP-16", "mapel": "Pendidikan Pancasila", "soal": "Rina tidak setuju dengan keputusan hasil musyawarah kelas. Namun, keputusan tersebut telah disepakati bersama. Sikap yang mencerminkan tanggung jawab Rina adalah ....", "a": "menolak melaksanakan keputusan", "b": "mengajak teman-teman membuat keputusan baru sendiri", "c": "menghargai dan melaksanakan keputusan bersama dengan lapang dada", "d": "menyalahkan teman yang berbeda pendapat", "kunci": "C", "pembahasan": "Keputusan mufakat wajib dihormati dan dilaksanakan dengan penuh tanggung jawab oleh seluruh peserta."}, {"id": "PP-17", "mapel": "Pendidikan Pancasila", "soal": "Dalam musyawarah pemilihan ketua kelas, seorang siswa terus memaksakan pilihannya dan tidak mau mendengarkan pendapat teman. Perilaku tersebut tidak sesuai dengan prinsip musyawarah karena ....", "a": "setiap orang harus memiliki pendapat yang sama", "b": "musyawarah harus mengutamakan kepentingan pribadi", "c": "setiap peserta harus saling menghargai dan memiliki kesempatan berpendapat", "d": "keputusan hanya boleh dibuat oleh guru", "kunci": "C", "pembahasan": "Memaksakan kehendak melanggar prinsip kebebasan berpendapat dan saling menghargai dalam musyawarah."}, {"id": "PP-18", "mapel": "Pendidikan Pancasila", "soal": "Warga RT sedang membahas jadwal ronda malam. Sebagian warga memiliki pekerjaan pada malam hari sehingga tidak dapat mengikuti jadwal tertentu. Keputusan yang paling adil adalah ....", "a": "menetapkan jadwal tanpa mempertimbangkan kondisi warga", "b": "menyerahkan seluruh tugas ronda kepada warga yang sama", "c": "membahas ulang jadwal agar sesuai kemampuan dan kondisi warga", "d": "menghapus kegiatan ronda tanpa pembahasan", "kunci": "C", "pembahasan": "Musyawarah yang adil mempertimbangkan kondisi serta kemampuan setiap warga agar keputusan dapat dijalankan bersama."}, {"id": "PP-19", "mapel": "Pendidikan Pancasila", "soal": "Musyawarah kelas belum mencapai kesepakatan karena terdapat dua usulan yang sama-sama kuat. Sikap yang sebaiknya dilakukan peserta musyawarah adalah ....", "a": "saling menyalahkan sampai salah satu menyerah", "b": "mendiskusikan kembali alasan setiap usulan dan mencari kesepakatan", "c": "membubarkan rapat tanpa keputusan", "d": "menyerahkan keputusan kepada siswa yang paling kaya", "kunci": "B", "pembahasan": "Jika belum mufakat, peserta mendiskusikan kembali kelebihan tiap usulan secara musyawarah (atau voting jika diperlukan)."}, {"id": "PP-20", "mapel": "Pendidikan Pancasila", "soal": "Kelas VI akan membuat program untuk menjaga kebersihan lingkungan sekolah. Rancangan langkah musyawarah yang paling tepat adalah ....", "a": "ketua kelas menentukan seluruh kegiatan tanpa bertanya kepada anggota", "b": "setiap siswa menjalankan kegiatan masing-masing tanpa koordinasi", "c": "mengumpulkan usulan, mendiskusikan kegiatan, menyepakati jadwal, dan membagi tugas", "d": "memilih kegiatan yang disukai beberapa siswa saja", "kunci": "C", "pembahasan": "Musyawarah yang sistematis dimulai dari menampung usulan, diskusi, menyepakati jadwal, hingga pembagian tugas."}];
+
+    // =========================================================================
+    // 2. STATE APLIKASI
+    // =========================================================================
+    let state = {
+      nama: "",
+      kelas: "6A",
+      mode: "adventure", // 'adventure' | 'practice'
+      soundOn: true,
+      scriptUrl: localStorage.getItem("alhusna_script_url") || PRESET_SCRIPT_URL,
+      allQuestions: [...EMBEDDED_QUESTIONS],
+      settings: {
+        Jumlah_Soal_Per_Sesi: 20,
+        Waktu_Per_Soal_Detik: 45
+      },
+      leaderboard: JSON.parse(localStorage.getItem("alhusna_local_lb") || "[]"),
+      // Quiz session state
+      currentSubject: "",
+      sessionQuestions: [],
+      currentIndex: 0,
+      lives: 3,
+      scorePoints: 0,
+      benarCount: 0,
+      salahCount: 0,
+      combo: 0,
+      maxCombo: 0,
+      timeLeft: 45,
+      timerInterval: null,
+      quizStartTime: 0,
+      used5050: false,
+      usedAddTime: false,
+      answeredCurrent: false,
+      reviewLog: [],
+      previousScreen: "screenLogin"
+    };
+
+    // =========================================================================
+    // 3. WEB AUDIO API (EFEK SUARA TANPA FILE EKSTERNAL)
+    // =========================================================================
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playTone(freq, type, duration, delay = 0) {
+      if (!state.soundOn) return;
+      try {
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+        gain.gain.setValueAtTime(0.14, audioCtx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + delay);
+        osc.stop(audioCtx.currentTime + delay + duration);
+      } catch (e) {}
+    }
+
+    function sfxCorrect() {
+      playTone(523.25, "sine", 0.14, 0);
+      playTone(659.25, "sine", 0.14, 0.09);
+      playTone(783.99, "sine", 0.24, 0.18);
+    }
+    function sfxWrong() {
+      playTone(220, "sawtooth", 0.18, 0);
+      playTone(175, "sawtooth", 0.26, 0.14);
+    }
+    function sfxVictory() {
+      [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => playTone(f, "triangle", 0.22, idx * 0.11));
+    }
+
+    function toggleSound() {
+      state.soundOn = !state.soundOn;
+      document.getElementById("soundBtn").textContent = state.soundOn ? "🔊 Suara" : "🔇 Bisu";
+    }
+
+    // =========================================================================
+    // 4. NAVIGASI LAYAR & IDENTITAS SISWA
+    // =========================================================================
+    function showScreen(id) {
+      ["screenLogin", "screenSubjects", "screenQuiz", "screenResult", "screenLeaderboard"].forEach(s => {
+        document.getElementById(s).classList.add("hidden");
+      });
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    function selectClass(kls) {
+      state.kelas = kls;
+      document.querySelectorAll(".class-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.kelas === kls);
+      });
+    }
+
+    function selectMode(mode) {
+      state.mode = mode;
+      document.getElementById("modeAdventure").classList.toggle("active", mode === "adventure");
+      document.getElementById("modePractice").classList.toggle("active", mode === "practice");
+    }
+
+    function enterLobby() {
+      const namaInput = document.getElementById("inputNama").value.trim();
+      if (!namaInput) {
+        alert("Silakan tuliskan nama lengkapmu terlebih dahulu ya!");
+        document.getElementById("inputNama").focus();
+        return;
+      }
+      state.nama = namaInput;
+      document.getElementById("displayNama").textContent = state.nama;
+      document.getElementById("displayKelas").textContent = state.kelas;
+      document.getElementById("displayMode").textContent =
+        state.mode === "adventure" ? "Mode Petualangan (3 Nyawa)" : "Mode Latihan ASAS";
+      document.getElementById("avatarInitial").textContent = state.nama.charAt(0).toUpperCase();
+
+      renderSubjectsGrid();
+      showScreen("screenSubjects");
+    }
+
+    function backToLogin() {
+      showScreen("screenLogin");
+    }
+
+    function goToSubjects() {
+      renderSubjectsGrid();
+      showScreen("screenSubjects");
+    }
+
+    // =========================================================================
+    // 5. RENDER 10 MATA PELAJARAN
+    // =========================================================================
+    function renderSubjectsGrid() {
+      const grid = document.getElementById("subjectsGrid");
+      grid.innerHTML = "";
+
+      SUBJECT_CATALOG.forEach(subj => {
+        const count = state.allQuestions.filter(q =>
+          q.mapel.toLowerCase() === subj.name.toLowerCase()
+        ).length;
+
+        const isReady = count > 0;
+        const card = document.createElement("div");
+        card.className = "subject-card" + (isReady ? "" : " disabled");
+        card.innerHTML = `
+          <div>
+            <div class="subj-icon" style="background:${subj.bg}; color:${subj.color};">${subj.icon}</div>
+            <div class="subj-name">${subj.name}</div>
+          </div>
+          <div>
+            <span class="subj-badge ${isReady ? 'badge-ready' : 'badge-soon'}">
+              ${isReady ? `✅ Tersedia (${count} Soal)` : '⏳ Soal Menyusul'}
+            </span>
+          </div>
+        `;
+        card.onclick = () => {
+          if (!isReady) {
+            alert(`Soal mata pelajaran "${subj.name}" sedang disiapkan oleh Bapak/Ibu Guru dan akan segera menyusul!`);
+            return;
+          }
+          startQuiz(subj.name);
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // 6. LOGIKA PERMAINAN KUIS
+    // =========================================================================
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function startQuiz(subjectName) {
+      const pool = state.allQuestions.filter(q => q.mapel.toLowerCase() === subjectName.toLowerCase());
+      const maxQ = Number(state.settings.Jumlah_Soal_Per_Sesi) || 20;
+      const selected = shuffleArray(pool).slice(0, maxQ);
+
+      state.currentSubject = subjectName;
+      state.sessionQuestions = selected;
+      state.currentIndex = 0;
+      state.lives = state.mode === "adventure" ? 3 : 999;
+      state.scorePoints = 0;
+      state.benarCount = 0;
+      state.salahCount = 0;
+      state.combo = 0;
+      state.maxCombo = 0;
+      state.used5050 = false;
+      state.usedAddTime = false;
+      state.reviewLog = [];
+      state.quizStartTime = Date.now();
+
+      document.getElementById("btn5050").disabled = false;
+      document.getElementById("btnAddTime").disabled = false;
+      document.getElementById("quizMapelLabel").textContent = `📘 ${subjectName}`;
+
+      showScreen("screenQuiz");
+      renderCurrentQuestion();
+    }
+
+    function renderCurrentQuestion() {
+      clearInterval(state.timerInterval);
+      state.answeredCurrent = false;
+
+      const total = state.sessionQuestions.length;
+      const q = state.sessionQuestions[state.currentIndex];
+
+      document.getElementById("quizProgressLabel").textContent = `Soal ${state.currentIndex + 1} / ${total}`;
+      document.getElementById("progressFill").style.width = `${(state.currentIndex / total) * 100}%`;
+      document.getElementById("hudScore").textContent = `⭐ ${state.scorePoints}`;
+
+      if (state.mode === "adventure") {
+        document.getElementById("hudLives").classList.remove("hidden");
+        document.getElementById("hudLives").textContent = "❤️".repeat(Math.max(0, state.lives)) + "🖤".repeat(Math.max(0, 3 - state.lives));
+      } else {
+        document.getElementById("hudLives").classList.add("hidden");
+      }
+
+      const comboEl = document.getElementById("hudCombo");
+      if (state.combo >= 2) {
+        comboEl.classList.remove("hidden");
+        comboEl.textContent = `🔥 Combo x${state.combo}`;
+      } else {
+        comboEl.classList.add("hidden");
+      }
+
+      document.getElementById("questionText").textContent = `${state.currentIndex + 1}. ${q.soal}`;
+      document.getElementById("feedbackBanner").classList.add("hidden");
+
+      // Acak urutan pilihan A, B, C, D sambil melacak jawaban yang benar
+      const rawOptions = [
+        { key: "A", text: q.a },
+        { key: "B", text: q.b },
+        { key: "C", text: q.c },
+        { key: "D", text: q.d }
+      ];
+      const shuffledOptions = shuffleArray(rawOptions);
+      const displayLetters = ["A", "B", "C", "D"];
+
+      const optGrid = document.getElementById("optionsGrid");
+      optGrid.innerHTML = "";
+
+      shuffledOptions.forEach((opt, idx) => {
+        const isCorrect = opt.key === q.kunci;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.dataset.isCorrect = isCorrect ? "1" : "0";
+        btn.dataset.text = opt.text;
+        btn.innerHTML = `
+          <span class="opt-letter">${displayLetters[idx]}</span>
+          <span>${opt.text}</span>
+        `;
+        btn.onclick = () => handleAnswer(btn, isCorrect, opt.text, q);
+        optGrid.appendChild(btn);
+      });
+
+      // Mulai Timer
+      state.timeLeft = Number(state.settings.Waktu_Per_Soal_Detik) || 45;
+      updateTimerUI();
+      state.timerInterval = setInterval(() => {
+        state.timeLeft--;
+        updateTimerUI();
+        if (state.timeLeft <= 0) {
+          clearInterval(state.timerInterval);
+          handleTimeout(q);
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const el = document.getElementById("hudTimer");
+      el.textContent = `⏱️ ${state.timeLeft}d`;
+      el.classList.toggle("danger", state.timeLeft <= 10);
+    }
+
+    function use5050() {
+      if (state.used5050 || state.answeredCurrent) return;
+      const buttons = Array.from(document.querySelectorAll(".option-btn"));
+      const wrongButtons = shuffleArray(buttons.filter(b => b.dataset.isCorrect === "0"));
+      wrongButtons.slice(0, 2).forEach(b => b.classList.add("eliminated"));
+      state.used5050 = true;
+      document.getElementById("btn5050").disabled = true;
+    }
+
+    function useAddTime() {
+      if (state.usedAddTime || state.answeredCurrent) return;
+      state.timeLeft += 15;
+      updateTimerUI();
+      state.usedAddTime = true;
+      document.getElementById("btnAddTime").disabled = true;
+    }
+
+    function handleAnswer(selectedBtn, isCorrect, chosenText, q) {
+      if (state.answeredCurrent) return;
+      state.answeredCurrent = true;
+      clearInterval(state.timerInterval);
+
+      const allBtns = document.querySelectorAll(".option-btn");
+      let correctAnswerText = "";
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.dataset.isCorrect === "1") {
+          b.classList.add("correct");
+          correctAnswerText = b.dataset.text;
+        }
+      });
+
+      const fb = document.getElementById("feedbackBanner");
+      const fbContent = document.getElementById("feedbackContent");
+      fb.classList.remove("hidden", "ok", "bad");
+
+      if (isCorrect) {
+        sfxCorrect();
+        state.benarCount++;
+        state.combo++;
+        if (state.combo > state.maxCombo) state.maxCombo = state.combo;
+        const bonus = state.combo >= 2 ? (state.combo - 1) * 10 : 0;
+        state.scorePoints += 100 + bonus;
+
+        fb.classList.add("ok");
+        fbContent.innerHTML = `
+          <div><b>🎉 MasyaAllah, Benar!</b> ${bonus > 0 ? `(Bonus Combo +${bonus} poin!)` : ""}</div>
+          <div style="margin-top:4px; font-size:0.84rem;">${q.pembahasan || ""}</div>
+        `;
+      } else {
+        sfxWrong();
+        selectedBtn.classList.add("wrong");
+        state.salahCount++;
+        state.combo = 0;
+        if (state.mode === "adventure") state.lives--;
+
+        fb.classList.add("bad");
+        fbContent.innerHTML = `
+          <div><b>💡 Kurang Tepat!</b> Jawaban yang benar: <b>${correctAnswerText}</b></div>
+          <div style="margin-top:4px; font-size:0.84rem;">${q.pembahasan || ""}</div>
+        `;
+      }
+
+      document.getElementById("hudScore").textContent = `⭐ ${state.scorePoints}`;
+      if (state.mode === "adventure") {
+        document.getElementById("hudLives").textContent = "❤️".repeat(Math.max(0, state.lives)) + "🖤".repeat(Math.max(0, 3 - state.lives));
+      }
+
+      state.reviewLog.push({
+        soal: q.soal,
+        chosen: chosenText,
+        correct: correctAnswerText,
+        isCorrect,
+        pembahasan: q.pembahasan
+      });
+
+      const isLast = state.currentIndex >= state.sessionQuestions.length - 1;
+      const outOfLives = state.mode === "adventure" && state.lives <= 0;
+      document.getElementById("btnNextQuestion").textContent = (isLast || outOfLives) ? "Lihat Hasil Akhir 🏁" : "Soal Berikutnya ➡️";
+    }
+
+    function handleTimeout(q) {
+      if (state.answeredCurrent) return;
+      state.answeredCurrent = true;
+      sfxWrong();
+      state.salahCount++;
+      state.combo = 0;
+      if (state.mode === "adventure") state.lives--;
+
+      const allBtns = document.querySelectorAll(".option-btn");
+      let correctAnswerText = "";
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.dataset.isCorrect === "1") {
+          b.classList.add("correct");
+          correctAnswerText = b.dataset.text;
+        }
+      });
+
+      const fb = document.getElementById("feedbackBanner");
+      fb.classList.remove("hidden", "ok", "bad");
+      fb.classList.add("bad");
+      document.getElementById("feedbackContent").innerHTML = `
+        <div><b>⏰ Waktu Habis!</b> Jawaban yang benar: <b>${correctAnswerText}</b></div>
+        <div style="margin-top:4px; font-size:0.84rem;">${q.pembahasan || ""}</div>
+      `;
+
+      state.reviewLog.push({
+        soal: q.soal,
+        chosen: "(Waktu Habis)",
+        correct: correctAnswerText,
+        isCorrect: false,
+        pembahasan: q.pembahasan
+      });
+
+      const isLast = state.currentIndex >= state.sessionQuestions.length - 1;
+      const outOfLives = state.mode === "adventure" && state.lives <= 0;
+      document.getElementById("btnNextQuestion").textContent = (isLast || outOfLives) ? "Lihat Hasil Akhir 🏁" : "Soal Berikutnya ➡️";
+    }
+
+    function nextQuestion() {
+      const outOfLives = state.mode === "adventure" && state.lives <= 0;
+      if (outOfLives || state.currentIndex >= state.sessionQuestions.length - 1) {
+        finishQuiz();
+        return;
+      }
+      state.currentIndex++;
+      renderCurrentQuestion();
+    }
+
+    function confirmQuitQuiz() {
+      if (confirm("Yakin ingin keluar dari sesi kuis ini? Progres saat ini tidak akan disimpan.")) {
+        clearInterval(state.timerInterval);
+        goToSubjects();
+      }
+    }
+
+    // =========================================================================
+    // 7. HASIL AKHIR & SIMPAN KE GOOGLE SPREADSHEET
+    // =========================================================================
+    function getPredikat(nilai) {
+      if (nilai >= 90) return { label: "MUMTAZ (ISTIMEWA)", trophy: "🏆" };
+      if (nilai >= 80) return { label: "JAYYID JIDDAN (SANGAT BAIK)", trophy: "🥇" };
+      if (nilai >= 70) return { label: "JAYYID (BAIK)", trophy: "🥈" };
+      return { label: "PERLU BIMBINGAN & LATIHAN", trophy: "📘" };
+    }
+
+    async function finishQuiz() {
+      clearInterval(state.timerInterval);
+      sfxVictory();
+
+      const totalSoal = state.sessionQuestions.length;
+      const nilaiAkhir = Math.round((state.benarCount / totalSoal) * 100);
+      const durasiDetik = Math.max(1, Math.round((Date.now() - state.quizStartTime) / 1000));
+      const pred = getPredikat(nilaiAkhir);
+
+      document.getElementById("resTrophy").textContent = pred.trophy;
+      document.getElementById("resPredikat").textContent = pred.label;
+      document.getElementById("resScore").textContent = nilaiAkhir;
+      document.getElementById("resStudentMeta").textContent = `${state.nama} • Kelas ${state.kelas} • ${state.currentSubject}`;
+      document.getElementById("statBenar").textContent = `${state.benarCount} / ${totalSoal}`;
+      document.getElementById("statSalah").textContent = state.salahCount;
+      document.getElementById("statCombo").textContent = `${state.maxCombo}x`;
+      document.getElementById("statWaktu").textContent = `${durasiDetik}d`;
+
+      // Render review list
+      const revList = document.getElementById("reviewList");
+      revList.innerHTML = "";
+      state.reviewLog.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.className = "review-item " + (item.isCorrect ? "r-ok" : "r-bad");
+        div.innerHTML = `
+          <div style="font-weight:700; margin-bottom:4px;">${idx + 1}. ${item.soal}</div>
+          <div>Jawabanmu: <b>${item.chosen}</b> ${item.isCorrect ? "✅" : `❌ (Kunci: <b>${item.correct}</b>)`}</div>
+          ${item.pembahasan ? `<div style="color:var(--muted); margin-top:3px; font-size:0.8rem;">💡 ${item.pembahasan}</div>` : ""}
+        `;
+        revList.appendChild(div);
+      });
+
+      showScreen("screenResult");
+
+      // Simpan ke local leaderboard
+      const record = {
+        timestamp: new Date().toLocaleString("id-ID"),
+        nama: state.nama,
+        kelas: state.kelas,
+        mapel: state.currentSubject,
+        skor: nilaiAkhir,
+        benar: state.benarCount,
+        salah: state.salahCount,
+        totalSoal: totalSoal,
+        waktuDetik: durasiDetik,
+        predikat: pred.label
+      };
+      state.leaderboard.push(record);
+      state.leaderboard.sort((a, b) => b.skor - a.skor || a.waktuDetik - b.waktuDetik);
+      localStorage.setItem("alhusna_local_lb", JSON.stringify(state.leaderboard.slice(0, 100)));
+
+      // Kirim ke Google Spreadsheet jika URL sudah terpasang
+      const statusBox = document.getElementById("saveStatusBox");
+      if (!state.scriptUrl) {
+        statusBox.innerHTML = "ℹ️ Nilai tersimpan di perangkat ini (Hubungkan Google Spreadsheet di menu <b>⚙️ Guru</b> untuk rekap online).";
+        return;
+      }
+
+      statusBox.textContent = "⏳ Mengirim nilai ke Google Spreadsheet...";
+      try {
+        await fetch(state.scriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(record)
+        });
+        statusBox.innerHTML = "✅ <b>Alhamdulillah!</b> Nilai berhasil dikirim ke Google Spreadsheet SD Islam Al-Husna.";
+      } catch (err) {
+        statusBox.innerHTML = "⚠️ Gagal mengirim ke Google Spreadsheet (periksa koneksi internet), nilai tetap tersimpan di perangkat.";
+      }
+    }
+
+    function playAgainSameSubject() {
+      startQuiz(state.currentSubject);
+    }
+
+    // =========================================================================
+    // 8. SINKRONISASI GOOGLE SPREADSHEET & LEADERBOARD
+    // =========================================================================
+    async function syncFromGoogleSheet(showAlert = false) {
+      const dot = document.getElementById("syncDot");
+      const text = document.getElementById("syncText");
+
+      if (!state.scriptUrl) {
+        dot.classList.remove("online");
+        text.textContent = `Mode Lokal (${state.allQuestions.length} Soal)`;
+        return;
+      }
+
+      text.textContent = "Menyinkronkan...";
+      try {
+        const res = await fetch(`${state.scriptUrl}?action=getAll`);
+        const data = await res.json();
+        if (data.status === "success") {
+          if (Array.isArray(data.questions) && data.questions.length > 0) {
+            state.allQuestions = data.questions;
+          }
+          if (data.settings) {
+            state.settings = { ...state.settings, ...data.settings };
+          }
+          if (Array.isArray(data.leaderboard)) {
+            state.leaderboard = data.leaderboard;
+          }
+          dot.classList.add("online");
+          text.textContent = `Terhubung Sheets (${state.allQuestions.length} Soal)`;
+          renderSubjectsGrid();
+          if (showAlert) alert(`Berhasil tersambung! Total ${state.allQuestions.length} soal aktif dimuat dari Google Spreadsheet.`);
+        } else {
+          throw new Error(data.message || "Respon tidak valid");
+        }
+      } catch (err) {
+        dot.classList.remove("online");
+        text.textContent = `Offline / Lokal (${state.allQuestions.length} Soal)`;
+        if (showAlert) alert("Tidak dapat mengambil data dari Google Spreadsheet. Pastikan URL Web App benar dan akses diatur ke 'Anyone / Siapa saja'.");
+      }
+    }
+
+    function openLeaderboard() {
+      const visibleScreen = ["screenLogin", "screenSubjects", "screenQuiz", "screenResult"].find(
+        id => !document.getElementById(id).classList.contains("hidden")
+      );
+      if (visibleScreen) state.previousScreen = visibleScreen;
+
+      const filterMapel = document.getElementById("filterMapel");
+      if (filterMapel.options.length <= 1) {
+        SUBJECT_CATALOG.forEach(s => {
+          const opt = document.createElement("option");
+          opt.value = s.name;
+          opt.textContent = s.name;
+          filterMapel.appendChild(opt);
+        });
+      }
+      renderLeaderboard();
+      showScreen("screenLeaderboard");
+    }
+
+    function closeLeaderboard() {
+      showScreen(state.previousScreen || "screenLogin");
+    }
+
+    async function refreshLeaderboardFromCloud() {
+      if (!state.scriptUrl) {
+        alert("URL Google Spreadsheet belum dipasang di menu Guru. Menampilkan data perangkat lokal.");
+        renderLeaderboard();
+        return;
+      }
+      await syncFromGoogleSheet(false);
+      renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+      const kls = document.getElementById("filterKelas").value;
+      const mapel = document.getElementById("filterMapel").value;
+      const tbody = document.getElementById("leaderboardBody");
+
+      let filtered = [...state.leaderboard];
+      if (kls !== "ALL") filtered = filtered.filter(r => String(r.kelas).toUpperCase() === kls);
+      if (mapel !== "ALL") filtered = filtered.filter(r => r.mapel === mapel);
+
+      filtered.sort((a, b) => b.skor - a.skor || a.waktuDetik - b.waktuDetik);
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--muted);">Belum ada data nilai untuk filter ini.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = "";
+      filtered.slice(0, 50).forEach((row, idx) => {
+        const medal = idx === 0 ? "🥇 1" : idx === 1 ? "🥈 2" : idx === 2 ? "🥉 3" : `#${idx + 1}`;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="font-weight:800;">${medal}</td>
+          <td style="font-weight:700;">${row.nama}</td>
+          <td><span class="subj-badge badge-ready">${row.kelas}</span></td>
+          <td>${row.mapel}</td>
+          <td style="font-weight:800; color:var(--primary); font-size:1rem;">${row.skor}</td>
+          <td>${row.benar} / ${row.totalSoal || 20}</td>
+          <td>${row.waktuDetik}d</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // =========================================================================
+    // 9. MODAL PENGATURAN GURU
+    // =========================================================================
+    function openTeacherModal() {
+      document.getElementById("teacherModal").classList.remove("hidden");
+      document.getElementById("scriptUrlInput").value = state.scriptUrl || "";
+    }
+
+    function closeTeacherModal() {
+      document.getElementById("teacherModal").classList.add("hidden");
+    }
+
+    function verifyTeacherPin() {
+      const pin = document.getElementById("teacherPinInput").value.trim();
+      if (pin === "2026") {
+        document.getElementById("pinGate").classList.add("hidden");
+        document.getElementById("teacherPanel").classList.remove("hidden");
+      } else {
+        alert("PIN salah! (Default: 2026)");
+      }
+    }
+
+    async function saveScriptUrl() {
+      const url = document.getElementById("scriptUrlInput").value.trim();
+      if (!url.startsWith("https://script.google.com/")) {
+        alert("URL harus diawali dengan https://script.google.com/...");
+        return;
+      }
+      state.scriptUrl = url;
+      localStorage.setItem("alhusna_script_url", url);
+      document.getElementById("teacherTestResult").textContent = "⏳ Menguji koneksi ke Google Spreadsheet...";
+      await syncFromGoogleSheet(true);
+      document.getElementById("teacherTestResult").textContent =
+        `✅ Tersambung! Ditemukan ${state.allQuestions.length} soal aktif di Spreadsheet.`;
+    }
+
+    function resetScriptUrl() {
+      state.scriptUrl = "";
+      localStorage.removeItem("alhusna_script_url");
+      document.getElementById("scriptUrlInput").value = "";
+      state.allQuestions = [...EMBEDDED_QUESTIONS];
+      syncFromGoogleSheet(false);
+      renderSubjectsGrid();
+      document.getElementById("teacherTestResult").textContent = "Koneksi diputus. Kembali ke 60 soal bawaan.";
+    }
+
+    // Inisialisasi saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      if (state.scriptUrl) {
+        syncFromGoogleSheet(false);
+      }
+    });
+  </script>
+</body>
+</html>
